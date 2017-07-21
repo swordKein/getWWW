@@ -1,12 +1,12 @@
-package main.java.com.unus.beans.getwww_mod1.newssite;
+package com.unus.beans.getwww_mod1.newssite;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.com.unus.beans.getwww_mod1.getwww;
-import main.java.com.unus.beans.getwww_mod1.util.FileUtils;
+import com.unus.beans.getwww_mod1.getwww;
+import com.unus.beans.getwww_mod1.util.FileUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

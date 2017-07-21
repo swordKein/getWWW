@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.blog;
+package com.unus.beans.getwww_mod1.blog;
 
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import main.java.com.unus.beans.getwww_mod1.getwww;
-import main.java.com.unus.beans.getwww_mod1.newssite.seoul;
+import com.unus.beans.getwww_mod1.getwww;
+import com.unus.beans.getwww_mod1.newssite.seoul;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

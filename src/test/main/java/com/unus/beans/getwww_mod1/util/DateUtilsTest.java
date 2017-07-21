@@ -1,4 +1,4 @@
-package test.main.java.com.unus.beans.getwww_mod1.util;
+package test.com.unus.beans.getwww_mod1.util;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import com.google.gson.Gson;
 
-import main.java.com.unus.beans.getwww_mod1.util.DateUtils;
+import com.unus.beans.getwww_mod1.util.DateUtils;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.sns;
+package com.unus.beans.getwww_mod1.sns;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import main.java.com.unus.beans.getwww_mod1.*;
-import main.java.com.unus.beans.getwww_mod1.sns.*;
-import main.java.com.unus.beans.getwww_mod1.util.*;
+import com.unus.beans.getwww_mod1.*;
+import com.unus.beans.getwww_mod1.sns.*;
+import com.unus.beans.getwww_mod1.util.*;
 
 import org.json.simple.JSONValue;
 

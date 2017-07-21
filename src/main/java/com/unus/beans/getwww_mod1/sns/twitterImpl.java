@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.sns;
+package com.unus.beans.getwww_mod1.sns;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import main.java.com.unus.beans.getwww_mod1.*;
+import com.unus.beans.getwww_mod1.*;
 
 import twitter4j.*;
 import twitter4j.auth.*;
-import main.java.com.unus.beans.getwww_mod1.util.DateUtils;
+import com.unus.beans.getwww_mod1.util.DateUtils;
 
 public class twitterImpl {
 	public static final String siteCode = "tw";

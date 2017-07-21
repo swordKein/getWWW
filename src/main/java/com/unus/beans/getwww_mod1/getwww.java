@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1;
+package com.unus.beans.getwww_mod1;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,23 +17,23 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.java.com.unus.beans.getwww_mod1.blog.daumBlog;
-import main.java.com.unus.beans.getwww_mod1.blog.naverBlog;
-import main.java.com.unus.beans.getwww_mod1.newssite.chosun;
-import main.java.com.unus.beans.getwww_mod1.newssite.daum;
-import main.java.com.unus.beans.getwww_mod1.newssite.daumHandler;
-import main.java.com.unus.beans.getwww_mod1.newssite.daylian;
-import main.java.com.unus.beans.getwww_mod1.newssite.donga;
-import main.java.com.unus.beans.getwww_mod1.newssite.hani;
-import main.java.com.unus.beans.getwww_mod1.newssite.joongang;
-import main.java.com.unus.beans.getwww_mod1.newssite.khan;
-import main.java.com.unus.beans.getwww_mod1.newssite.kookmin;
-import main.java.com.unus.beans.getwww_mod1.newssite.ohmynews;
-import main.java.com.unus.beans.getwww_mod1.newssite.seoul;
-import main.java.com.unus.beans.getwww_mod1.sns.facebookImpl;
-import main.java.com.unus.beans.getwww_mod1.sns.twitterImpl;
-import main.java.com.unus.beans.getwww_mod1.util.CommonUtils;
-import main.java.com.unus.beans.getwww_mod1.util.DateUtils;
+import com.unus.beans.getwww_mod1.blog.daumBlog;
+import com.unus.beans.getwww_mod1.blog.naverBlog;
+import com.unus.beans.getwww_mod1.newssite.chosun;
+import com.unus.beans.getwww_mod1.newssite.daum;
+import com.unus.beans.getwww_mod1.newssite.daumHandler;
+import com.unus.beans.getwww_mod1.newssite.daylian;
+import com.unus.beans.getwww_mod1.newssite.donga;
+import com.unus.beans.getwww_mod1.newssite.hani;
+import com.unus.beans.getwww_mod1.newssite.joongang;
+import com.unus.beans.getwww_mod1.newssite.khan;
+import com.unus.beans.getwww_mod1.newssite.kookmin;
+import com.unus.beans.getwww_mod1.newssite.ohmynews;
+import com.unus.beans.getwww_mod1.newssite.seoul;
+import com.unus.beans.getwww_mod1.sns.facebookImpl;
+import com.unus.beans.getwww_mod1.sns.twitterImpl;
+import com.unus.beans.getwww_mod1.util.CommonUtils;
+import com.unus.beans.getwww_mod1.util.DateUtils;
 
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpClient;

@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.util;
+package com.unus.beans.getwww_mod1.util;
 
 import java.net.URL;
 import java.util.*;

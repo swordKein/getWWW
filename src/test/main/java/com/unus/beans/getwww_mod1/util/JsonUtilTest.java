@@ -1,4 +1,4 @@
-package test.main.java.com.unus.beans.getwww_mod1.util;
+package test.com.unus.beans.getwww_mod1.util;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -13,8 +13,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import main.java.com.unus.beans.getwww_mod1.util.DateUtils;
-import main.java.com.unus.beans.getwww_mod1.util.JsonUtil;
+import com.unus.beans.getwww_mod1.util.DateUtils;
+import com.unus.beans.getwww_mod1.util.JsonUtil;
 
 import static org.junit.Assert.*;
 

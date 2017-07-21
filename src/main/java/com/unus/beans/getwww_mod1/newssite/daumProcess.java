@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.newssite;
+package com.unus.beans.getwww_mod1.newssite;
 
 import java.io.OutputStreamWriter;
 import java.text.ParseException;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import main.java.com.unus.beans.getwww_mod1.getwww;
-import main.java.com.unus.beans.getwww_mod1.util.CommonUtils;
-import main.java.com.unus.beans.getwww_mod1.util.DateUtils;
+import com.unus.beans.getwww_mod1.getwww;
+import com.unus.beans.getwww_mod1.util.CommonUtils;
+import com.unus.beans.getwww_mod1.util.DateUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

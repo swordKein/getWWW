@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.util;
+package com.unus.beans.getwww_mod1.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.java.com.unus.beans.getwww_mod1.getwww;
+import com.unus.beans.getwww_mod1.getwww;
 
 public class FileUtils {
 	public static Map<String, Object> fileOpener(String path, String siteCode, String type, String startDate, String ext) {

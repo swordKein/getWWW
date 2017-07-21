@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.util;
+package com.unus.beans.getwww_mod1.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;

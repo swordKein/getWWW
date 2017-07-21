@@ -1,4 +1,4 @@
-package main.java.com.unus.beans.getwww_mod1.util;
+package com.unus.beans.getwww_mod1.util;
 
 public class Base64 {
     private static final byte[] encodingTable = {
