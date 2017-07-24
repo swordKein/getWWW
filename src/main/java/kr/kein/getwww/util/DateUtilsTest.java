@@ -1,12 +1,10 @@
-package test.kr.kein.getwww.util;
+package kr.kein.getwww.util;
 
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import org.junit.*;
 import com.google.gson.Gson;
 
 import kr.kein.getwww.util.DateUtils;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +16,7 @@ import java.util.Map.Entry;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class DateUtilsTest {
+public class DateUtilsTest{
 
     @Test
     public void testGetRemoveStringBySet() throws Exception {

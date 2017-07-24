@@ -1,4 +1,4 @@
-package test.kr.kein.getwww.util;
+package kr.kein.getwww.util;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
