@@ -83,6 +83,7 @@ public class daumFinan extends Thread {
 		Elements txtDate = docTitles.select("#contentWrap .time");
 		String thisDate = DateUtils.getLocalDate2();
 		String thisTime = txtDate.text();
+		if ("".equals(thisTime)) thisTime="15:30";
 		System.out.println("this time:"+thisDate + " " +thisTime);
 
 		Elements dataRows = docTitles.select(".gTable");

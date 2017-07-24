@@ -74,9 +74,11 @@ public class getwww {
 	public static String endedDate;
 
 	//public static String tmpPath = "/home/beans/tmp/";
-	public static String tmpPath = "O:\\COLL\\tmp\\";
+	//public static String tmpPath = "O:\\COLL\\tmp\\";
+	public static String tmpPath = ".";
 	//public static String filePath = "/home/beans/getin/";
-	public static String filePath = "O:\\COLL\\getin\\";
+	//public static String filePath = "O:\\COLL\\getin\\";
+	public static String filePath = ".";
 
 	//public static String path = "O:\\COLL\\";
 	
