@@ -147,7 +147,7 @@ public class twitterImpl {
 		    		} catch (Exception e) {
 		    			e.printStackTrace(); System.out.println(" :: getRetweets  error :: "+e.getCause());
 		    		}
-		    		/* #TODO
+		    		/*
 		    		if (rtStatus != null && rtStatus.size() > 0 ) { System.out.println(" :: Retweet Original :: "+rtStatus.toString()); }
 		    		
 		    		Status rStatus = twitter.showStatus(status.getInReplyToStatusId());

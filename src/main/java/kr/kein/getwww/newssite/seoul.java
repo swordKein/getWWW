@@ -143,9 +143,9 @@ public class seoul {
 						+ tab + keyset2;
 				
 				//System.out.println(outText+"\n");
-				// #TODO .write 실제 파일에 쓰기
+
 				if("file".equals(getwww.runningMode)) {					
-					// #TODO .write 실제 파일에 쓰기
+
 					outFwriter.write(outText+"\n");
 				} else if("console".equals(getwww.runningMode)) {
 					System.out.println(outText);
@@ -252,14 +252,15 @@ public class seoul {
 		//if (reply != null) { System.out.println("REPLY :"+reply.toString()); }
 		
 		if (getSum > 0) { 
-			seoul.getNewsSeoulReply(newsId, ++pageno, replyMap, outFwriterReply);  // #TODO 이번 페이지에 읽어온 댓글이 있을 경우 다음 댓글 페이지를 검색하도록 조정 -재귀호출 
+			seoul.getNewsSeoulReply(newsId, ++pageno, replyMap, outFwriterReply);
+			// # 이번 페이지에 읽어온 댓글이 있을 경우 다음 댓글 페이지를 검색하도록 조정 -재귀호출
 		} else {
 			// FILE WRITING
 			/** 기사 댓글 리스트 OUTPUT Form**/
 			if (reply != null && reply.size() > 0) { 
 				for (String reTxt: reply) {
 					//System.out.println("  RE: "+reTxt.toString());
-					// #TODO .write 실제 파일에 쓰기
+
 					
 					try {
 						if("file".equals(getwww.runningMode)) {

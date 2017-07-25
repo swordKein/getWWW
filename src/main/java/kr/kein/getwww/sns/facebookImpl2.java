@@ -141,7 +141,7 @@ public class facebookImpl2 {
 			if (!"".equals(c_message)) { 
 				
 			if("file".equals(getwww.runningMode)) {					
-				// #TODO .write 실제 파일에 쓰기
+
 				outFwriter.write(outStr+"\n");
 			} else if("console".equals(getwww.runningMode)) {
 				System.out.println(outStr+"\n");
@@ -200,7 +200,7 @@ public class facebookImpl2 {
 			if (!"".equals(c_commentsStr)) {
 				
 			if("file".equals(getwww.runningMode)) {					
-				// #TODO .write 실제 파일에 쓰기
+
 				outFwriterReply.write(c_commentsStr);
 			} else if("console".equals(getwww.runningMode)) {
 				System.out.println(c_commentsStr+"\n");
