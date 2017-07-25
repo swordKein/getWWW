@@ -1,4 +1,4 @@
-package kr.kein.getwww.finan.daumFinan;
+package kr.kein.getwww.finan;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

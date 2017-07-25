@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 import kr.kein.getwww.blog.daumBlog;
 import kr.kein.getwww.blog.naverBlog;
-import kr.kein.getwww.finan.daumFinan.daumFinan;
+import kr.kein.getwww.finan.daumFinan;
 import kr.kein.getwww.newssite.chosun;
 import kr.kein.getwww.newssite.daum;
 import kr.kein.getwww.newssite.daylian;
