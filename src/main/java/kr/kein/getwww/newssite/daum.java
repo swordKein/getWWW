@@ -416,62 +416,65 @@ public class daum extends Thread {
 			JsonElement jelement = new JsonParser().parse(rsbody1);
 		    JsonObject  jobject = jelement.getAsJsonObject();
 		    JsonArray  jArr = (JsonArray) jobject.get("comments");
-		    
-		    for (int i = 0; i < jArr.size(); i++) {
-		    	JsonElement jEl = new JsonParser().parse(jArr.get(i).toString());
-		    	JsonObject  jObj = jEl.getAsJsonObject();
-		    	
-		    	String uuid = UUID.randomUUID().toString();  uuid = uuid.replace("-", "");
-		    	String articleId = jObj.get("articleId").toString();
-		    	String cmntId = jObj.get("id").toString();
-		    	String cType = "R";
-		    	JsonObject regDate = (JsonObject) jObj.get("regDate");
-		    	String regdate = regDate.get("time").toString();
-		    	regdate = DateUtils.getDateFromTimestampStr(regdate.substring(0,regdate.length()-3));
-		    		    			    	
-		    	String author = jObj.get("daumName").toString();	
-		    	author = getwww.removeTag(author);
-		    	
-		    	String childCnt = jObj.get("childCount").toString();
-		    	int childCount = ( !"".equals(childCnt)) ? Integer.parseInt(childCnt) : 0;
-		    	String agrCnt = jObj.get("recommendCount").toString();
-		    	String denCnt = jObj.get("disagreeCount").toString();
-		    	String content = jObj.get("commentContent").toString();
-		    	
-		    	content = getwww.removeTag(content);
-		    	
-		    			    	
-		    	//System.out.println("# REPLY ::  " + i + "'th => " + jArr.get(i));
-		    	String outText = "";
-		    	outText = CommonUtils.addQt(prefix) 
-		    			+ tab + CommonUtils.addQt(uuid) 
-		    			+ tab + CommonUtils.addQt(cType) 
-		    			+ tab + CommonUtils.addQt(regdate) 
-		    			+ tab + CommonUtils.addQt(author)  
-		    			+ tab + CommonUtils.addQt(content)
-		    			+ tab + CommonUtils.addQt(newsId) 
-		    			+ tab + CommonUtils.addQt("0")
-		    			+ tab + CommonUtils.addQt(cmntId) 
-		    			+ tab + CommonUtils.addQt(agrCnt) 
-		    			+ tab + CommonUtils.addQt(denCnt) 
-		    			+ tab + CommonUtils.addQt(childCnt) ;
-		    	
-		    	if("file".equals(getwww.runningMode)) {					
 
-		    		outFwriterReply.write(outText+"\n");
-				} else if("console".equals(getwww.runningMode)) {
-					System.out.println("#REPLY ::  " + i + "'th => " + outText);
-				}
+		    if (jArr != null) {
+				for (int i = 0; i < jArr.size(); i++) {
+					JsonElement jEl = new JsonParser().parse(jArr.get(i).toString());
+					JsonObject jObj = jEl.getAsJsonObject();
+
+					String uuid = UUID.randomUUID().toString();
+					uuid = uuid.replace("-", "");
+					String articleId = jObj.get("articleId").toString();
+					String cmntId = jObj.get("id").toString();
+					String cType = "R";
+					JsonObject regDate = (JsonObject) jObj.get("regDate");
+					String regdate = regDate.get("time").toString();
+					regdate = DateUtils.getDateFromTimestampStr(regdate.substring(0, regdate.length() - 3));
+
+					String author = jObj.get("daumName").toString();
+					author = getwww.removeTag(author);
+
+					String childCnt = jObj.get("childCount").toString();
+					int childCount = (!"".equals(childCnt)) ? Integer.parseInt(childCnt) : 0;
+					String agrCnt = jObj.get("recommendCount").toString();
+					String denCnt = jObj.get("disagreeCount").toString();
+					String content = jObj.get("commentContent").toString();
+
+					content = getwww.removeTag(content);
+
+
+					//System.out.println("# REPLY ::  " + i + "'th => " + jArr.get(i));
+					String outText = "";
+					outText = CommonUtils.addQt(prefix)
+							+ tab + CommonUtils.addQt(uuid)
+							+ tab + CommonUtils.addQt(cType)
+							+ tab + CommonUtils.addQt(regdate)
+							+ tab + CommonUtils.addQt(author)
+							+ tab + CommonUtils.addQt(content)
+							+ tab + CommonUtils.addQt(newsId)
+							+ tab + CommonUtils.addQt("0")
+							+ tab + CommonUtils.addQt(cmntId)
+							+ tab + CommonUtils.addQt(agrCnt)
+							+ tab + CommonUtils.addQt(denCnt)
+							+ tab + CommonUtils.addQt(childCnt);
+
+					if ("file".equals(getwww.runningMode)) {
+
+						outFwriterReply.write(outText + "\n");
+					} else if ("console".equals(getwww.runningMode)) {
+						System.out.println("#REPLY ::  " + i + "'th => " + outText);
+					}
 		    	 	
 		    	/*
 		    	 * 대댓글 건수( childCount > 0) 일 경우 대댓글 리스트 채집
 		    	 */
-		    	if (childCount > 0) {
-		    		daum.getDaumReplyReply(1, replyMap, outFwriterReply, newsId, articleId, cmntId, "UTF-8");
-		    	}
-		    	
-				getSum++;
-		    }
+					if (childCount > 0) {
+						daum.getDaumReplyReply(1, replyMap, outFwriterReply, newsId, articleId, cmntId, "UTF-8");
+					}
+
+					getSum++;
+				}
+			}
 		    
 		    //System.out.println("### jArr :: "+jArr.toString());
 		    
