@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.kein.getwww.dao.WhetherDataDao">
+
+    <resultMap id="result" type="Whether">
+        <result property="idx" column="idx"/>
+        <result property="addr1" column="addr1"/>
+        <result property="addr2" column="addr2"/>
+        <result property="code1" column="code1"/>
+        <result property="tag_date" column="tag_date"/>
+        <result property="s01_val" column="s01_val"/>
+        <result property="co_val" column="co_val"/>
+        <result property="o3_val" column="o3_val"/>
+        <result property="no2_val" column="no2_val"/>
+        <result property="pm10_val" column="pm10_val"/>
+        <result property="addr" column="addr"/>
+        <result property="lat" column="lat"/>
+        <result property="lng" column="lng"/>
+        <result property="regdate" column="regdate"/>
+    </resultMap>
+
+    <select id="selectPaging" resultType="Whether" parameterType="Paging">
+        /* selectPaging */
+        SELECT
+        addr1, addr2, code1, tag_date, s02_val, co_val, o3_val, no2_val, pm10_val, addr, lat, lng, regdate
+        FROM whether_data
+        limit #{startIdx}, #{pageSize};
+    </select>
+
+    <select id="selectAddrGroup" resultType="Whether">
+        /* selectAddrGroup */
+        select a.addr from (
+          select addr, count(*) from whether_data group by addr
+        ) a
+        order by a.addr asc
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="result">
+        SELECT * FROM persons WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="Whether" useGeneratedKeys="true" keyProperty="list_id">
+        INSERT INTO persons (name) VALUES (#{name});
+    </insert>
+
+    <update id="update" parameterType="Whether">
+        UPDATE persons
+        SET name = #{name}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE from persons WHERE id = #{id}
+    </delete>
+
+</mapper>
