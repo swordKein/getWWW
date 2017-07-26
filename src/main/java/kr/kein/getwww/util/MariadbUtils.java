@@ -11,6 +11,57 @@ import java.util.HashMap;
 
 public class MariadbUtils {
 
+    public static ArrayList<HashMap<String, Object>> selectGeoData(int pageNo, int pageSize) {
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        int startIdx = (pageNo-1) * pageSize;
+
+        ArrayList<HashMap<String, Object>> resultArr = null;
+
+        String sql = "select addr from geo_data order by idx asc limit ?, ? ";
+
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mariadb://52.34.161.133:3306/py", "py", "xkcjstk36");
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, startIdx);
+            pstmt.setInt(2, pageSize);
+
+            // Batch 실행
+            ResultSet rs = pstmt.executeQuery();
+
+            resultArr = new ArrayList<HashMap<String, Object>>();
+
+            while(rs.next()) {
+                //System.out.println("item:"+rs.getString("addr"));
+                HashMap<String, Object> newItem = new HashMap<String, Object>();
+                newItem.put("addr", rs.getString("addr"));
+
+                resultArr.add(newItem);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pstmt != null) try {
+                pstmt.close();
+                pstmt = null;
+            } catch (SQLException ex) {
+            }
+            if (con != null) try {
+                con.close();
+                con = null;
+            } catch (SQLException ex) {
+            }
+        }
+
+        return resultArr;
+    }
+
+
+
     public static void loadDataFileToStockKorea(String filename) {
 
         Connection con = null;
@@ -23,7 +74,8 @@ public class MariadbUtils {
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mariadb://", "", "");
+            //con = DriverManager.getConnection("jdbc:mariadb://", "", "");
+            con = DriverManager.getConnection("jdbc:mariadb://52.34.161.133:3306/py", "py", "xkcjstk36");
 
             statement = con.createStatement();
             statement.executeUpdate(

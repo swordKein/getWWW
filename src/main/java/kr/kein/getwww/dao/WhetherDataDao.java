@@ -8,4 +8,5 @@ import java.util.List;
 public interface WhetherDataDao {
     public List<Whether> selectPaging(Paging page);
     public List<Whether> selectAddrGroup();
+    public int insertGeoData(Whether param);
 }

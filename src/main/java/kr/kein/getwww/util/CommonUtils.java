@@ -3,6 +3,8 @@ package kr.kein.getwww.util;
 import java.io.File;
 import java.io.StringReader;
 import java.lang.reflect.Type;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,24 @@ import com.google.gson.stream.JsonReader;
 
 
 public class CommonUtils {
+	public static String getURLEncode(String req) {
+		String result = "";
+		try {
+			result = URLEncoder.encode(req, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public static String getURLDecode(String req) {
+		String result = "";
+		try {
+			result = URLDecoder.decode(req, "UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	public static String findFileEncoding(File file) {
   	  String encoding = "";
   	  try {

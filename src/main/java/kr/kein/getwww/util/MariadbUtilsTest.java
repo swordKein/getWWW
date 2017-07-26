@@ -13,4 +13,9 @@ public class MariadbUtilsTest {
     	MariadbUtils.insertBatch();
     }
 
+    @Test
+    public void selectGeoData() throws Exception {
+        System.out.println("result:"+MariadbUtils.selectGeoData(1, 10).toString());
+    }
+
 }

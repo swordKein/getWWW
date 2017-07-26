@@ -7,6 +7,7 @@
     <typeAliases>
         <typeAlias alias="Whether" type="kr.kein.getwww.vo.Whether" />
         <typeAlias alias="Paging" type="kr.kein.getwww.vo.Paging" />
+        <typeAlias alias="GeoData" type="kr.kein.getwww.vo.GeoData" />
     </typeAliases>
 
     <environments default="development">
@@ -16,7 +17,7 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver" />
                 <property name="url" value="jdbc:mysql://localhost:3306/py" />
-                <property name="username" value="##" />
+                <property name="username" value="py" />
                 <property name="password" value="##" />
             </dataSource>
         </environment>

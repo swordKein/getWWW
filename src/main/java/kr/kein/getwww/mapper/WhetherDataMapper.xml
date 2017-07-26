@@ -38,6 +38,13 @@
         order by a.addr asc
     </select>
 
+    <insert id="insertGeoData" parameterType="GeoData">
+        /* insertGeoData */
+        insert into geo_data (addr, lat, lng, regdate)
+        values (#{addr}, #{lat}, #{lng}, now())
+        ON DUPLICATE KEY UPDATE lat = #{lat}, lng = #{lng}, regdate = now()
+    </insert>
+
     <select id="selectById" parameterType="int" resultMap="result">
         SELECT * FROM persons WHERE id = #{id}
     </select>
