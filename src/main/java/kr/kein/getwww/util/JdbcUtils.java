@@ -10,9 +10,9 @@ public class JdbcUtils {
     private static Statement stmt;
     private static ResultSet rs;
 
-    private static String url = "jdbc:mariadb://52.34.161.133:3306/py";
-    private static String id = "py";
-    private static String pw = "xkcjstk36";
+    private static String url = "jdbc:mariadb://";
+    private static String id = "";
+    private static String pw = "";
 
     public JdbcUtils() {
 

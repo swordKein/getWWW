@@ -1,5 +1,6 @@
 package kr.kein.getwww.util;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +21,21 @@ public class DateUtils {
 	public static final int DATE = 3;
 	public static final int MONTHFIRST = 4;
 	public static final int MONTHEND = 5;
+
+	// 현재 날짜를 date type 으로 리턴
+	public static Date getCurrTime() {
+		Timestamp stamp = new Timestamp(System.currentTimeMillis());
+		Date date = new Date(stamp.getTime());
+		return date;
+	}
+
+	// 현재 날짜를 date type 으로 리턴
+	public static Timestamp getCurrTimestamp() {
+		Timestamp stamp = new Timestamp(System.currentTimeMillis());
+		//Date date = new Date(stamp.getTime());
+		return stamp;
+	}
+
 
 	/**
 	 * 입력한 날짜에 해당하는 GregorianCalendar 객체를 반환한다.
@@ -249,7 +265,7 @@ public class DateUtils {
 	 * 
 	 * @param field 연산 필드
 	 * @param amount 더할 수
-	 * @param yyyy-MM-dd 연산 대상 날짜
+	 * @param yyyymmdd-MM-dd 연산 대상 날짜
 	 * @return 연산된 날짜
 	 * @see java.util.Calendar <p>
 	 */
@@ -275,7 +291,7 @@ public class DateUtils {
 	 * 
 	 * @param field 연산 필드
 	 * @param amount 더할 수
-	 * @param yyyymmdd 연산 대상 날짜시간
+	 * @param yyyymmddhhmiss 연산 대상 날짜시간
 	 * @return 연산된 날짜시간
 	 * @see java.util.Calendar <p>
 	 */
@@ -347,7 +363,7 @@ public class DateUtils {
 	 * 
 	 * @param field 연산 필드
 	 * @param amount 더할 수
-	 * @param yyyy-mm-dd 연산 대상 날짜시간
+	 * @param yyyymmddhhmiss-mm-dd 연산 대상 날짜시간
 	 * @return 연산된 날짜시간
 	 * @see java.util.Calendar <p>
 	 */
@@ -662,7 +678,7 @@ public class DateUtils {
 	 * <p>
 	 * 입력한 시간을 웹 브라우저에 디스플레이하는 형태로 반환
 	 * 
-	 * @param yyyymmdd
+	 * @param yyyyMMddhhmmss
 	 * @return Calendar
 	 * @see java.util.Calendar <p>
 	 */

@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import kr.kein.getwww.getwww;
 import kr.kein.getwww.util.DateUtils;
+import kr.kein.getwww.util.MariadbUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,6 +13,7 @@ import org.jsoup.select.Elements;
 
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.*;
 
@@ -26,7 +28,7 @@ public class daumFinan extends Thread {
 	public static final String reqPath = "/quote/all.daum?type=S&stype=P";
 	public static final String reqPathKosdaq = "/quote/all.daum?type=S&stype=Q";
 	
-	public static int getDaumFinan(String reqTxt, int pageNo, String stDate, String edDate, OutputStreamWriter outFwriter, OutputStreamWriter outFwriterReply) throws Exception{
+	public static int getDaumFinan(String reqTxt, int pageNo, String stDate, String edDate, OutputStreamWriter outFwriter, OutputStreamWriter outFwriterReply, String outFileName) throws Exception{
 		//System.out.println("* Start =================================================================================================");
 		
 		String reqQuery = URLEncoder.encode(reqTxt, "UTF-8");
@@ -42,16 +44,17 @@ public class daumFinan extends Thread {
 		//reqparam.put("reqQuery","q");
 		//reqparam.put("reqQueryString",reqQuery);
 				
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 
 		String newsCateUrl = "";
 		
 		String reqPathIn = reqPath;
 								
 		String rsbody = getwww.getHtmlBody(reqHost, reqPort, reqPathIn, reqparam, "UTF-8");
-		getSum = daumFinan.parseJsonDaumFinan(rsbody, outFwriter, outFwriterReply);
-		
+		resultMap = daumFinan.parseJsonDaumFinan(rsbody, outFwriter, outFwriterReply);
+
 		if (getSum == 10) {
-			int resultCnt = getDaumFinan(reqTxt, ++pageNo, stDate, edDate, outFwriter, outFwriterReply);
+			int resultCnt = getDaumFinan(reqTxt, ++pageNo, stDate, edDate, outFwriter, outFwriterReply, outFileName);
 		}
 
 		reqPathIn = reqPathKosdaq;
@@ -59,17 +62,28 @@ public class daumFinan extends Thread {
 		rsbody = "";
 		getSum = 0;
 		rsbody = getwww.getHtmlBody(reqHost, reqPort, reqPathIn, reqparam, "UTF-8");
-		getSum = daumFinan.parseJsonDaumFinan(rsbody, outFwriter, outFwriterReply);
-
+		resultMap = null;
+		resultMap = daumFinan.parseJsonDaumFinan(rsbody, outFwriter, outFwriterReply);
+		if("db".equals(getwww.runningMode)) {
+			ArrayList<Object> resultArr = null;
+			if (resultMap != null && resultMap.get("outparams") != null) {
+				resultArr = (ArrayList<Object>) resultMap.get("outparams");
+				System.out.println("Result params save to DB!");
+				MariadbUtils.loadDataFileToStockKorea(outFileName);
+			}
+		}
 		if (getSum == 10) {
-			int resultCnt = getDaumFinan(reqTxt, ++pageNo, stDate, edDate, outFwriter, outFwriterReply);
+			int resultCnt = getDaumFinan(reqTxt, ++pageNo, stDate, edDate, outFwriter, outFwriterReply, outFileName);
 		}
 
 		//System.out.println("reqQuery :: "+ reqQuery + " :> " + pageNo + " PAGE getting count : "+getSum);
 		return pageNo;		
 	}
 
-	public static int parseJsonDaumFinan(String rsbody, OutputStreamWriter outFwriter, OutputStreamWriter outFwriterReply) throws Exception {
+	public static HashMap<String, Object> parseJsonDaumFinan(String rsbody, OutputStreamWriter outFwriter, OutputStreamWriter outFwriterReply) throws Exception {
+
+		ArrayList<Object> outParams = new ArrayList<Object>();
+
 		Document doc = Jsoup.parse(rsbody,"UTF-8");
 
 		/** get TITLE & CODE & PRICE List **/
@@ -167,35 +181,66 @@ public class daumFinan extends Thread {
 				//String rcomp = rComp.get(senum);
 				//content =  (getwww.removeTag(content));
 				//String agreeCnt = getAgreeDaum(nId);
+				/*
 				String outText = 
 						prefix 
 						+ tab + uuid 
 						+ tab + getwww.newsCate 
-						+ tab + rDate 
-					//	+ tab + rcomp 
+						+ tab + rDate
 						+ tab + "-"
 						+ tab + author
 						+ tab + getwww.removeTag(rTitles.get(senum))
 						+ tab + ""
-						+ tab + rCurPrice.get(senum)
+						+ tab + getwww.removeTag(rCurPrice.get(senum))
 						+ tab + nId
-					//	+ tab + agreeCnt
 						;
-				if("file".equals(getwww.runningMode)) {					
+				*/
 
+				Timestamp newDay = null;
+				try {
+					newDay = java.sql.Timestamp.valueOf(rDate+":00");
+				} catch (Exception e) { e.printStackTrace(); }
+
+				//System.out.println("#MLOG process time:"+newDay);
+
+				String outText =
+						uuid
+						+ tab + rDate
+						+ tab + newDay
+						+ tab + getwww.removeTag(rCurPrice.get(senum))
+						+ tab + DateUtils.getCurrTimestamp()
+						;
+
+				HashMap<String, Object> newItem = new HashMap<String, Object>();
+				newItem.put("code1",uuid);
+				newItem.put("day1",newDay);
+				newItem.put("day2",rDate);
+				newItem.put("price",Integer.parseInt(getwww.removeTag(rCurPrice.get(senum))));
+
+				outParams.add(newItem);
+
+				if("file".equals(getwww.runningMode)) {
+					outFwriter.write(outText+"\n");
+				} else if("db".equals(getwww.runningMode)) {
+					//MariadbUtils.insertBatchStockKorea(outParams);
+					//System.out.println(outText);
 					outFwriter.write(outText+"\n");
 				} else if("console".equals(getwww.runningMode)) {
 					System.out.println(outText);
 				}
-				
-				//Map<String,Object> replyMap = Seoul.getDaumBlogReply(keyset[9].replace(".html",""),1,null, outFwriterReply);
+
+					//Map<String,Object> replyMap = Seoul.getDaumBlogReply(keyset[9].replace(".html",""),1,null, outFwriterReply);
 				//System.out.println("Reply : \n"+ replyMap.get("reply"));
 
 				getSum++;				
 			}
 			senum++;
 		}
-		return getSum;
+
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("count", getSum);
+		result.put("outparams", outParams);
+		return result;
 	}
 	
 	public static Map<String, String> getDaumBlogContent(String url, String encoding) throws Exception {

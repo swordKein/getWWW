@@ -9,10 +9,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -95,6 +92,7 @@ public class getwww {
 		OutputStreamWriter sf1Writer = null;
 		OutputStreamWriter tm1Writer = null;
 		OutputStreamWriter of1Writer = null;
+		String fileName = "";
 		
 		if (args == null || args.length < 3) { 
 			System.out.println("Usage:  java -jar beans_getwww_mod1.jar %SITE_CODE %RUNNING_MODE %CATEGORY %START_DATE");
@@ -140,11 +138,11 @@ public class getwww {
 		else if ("txt".equals(newsCate)) { searchStr = dest;  startTag = "__" + searchStr.replace(" ", "_") + startTag; }
 		else { searchStr = args[2]; }
 		
-		if ("file".equals(runningMode)
-			&& !"twitter".equals(filePrefix)	
+		if ("file".equals(runningMode)  || "db".equals(runningMode)
+				&& !"twitter".equals(filePrefix)
 				) {
 			
-			String fileName = path +filePrefix+"_"+newsCate+startTag.replace("-","")+".csv";
+			fileName = path +filePrefix+"_"+newsCate+startTag.replace("-","")+".csv";
 			
 			fos = new FileOutputStream(fileName);
 			outFwriter = new OutputStreamWriter(fos, "UTF-8");
@@ -391,7 +389,7 @@ public class getwww {
 			case "daumfinan" :
 
 				System.out.println("\nDaumFinan :: searching ");
-				cnt = daumFinan.getDaumFinan("", 0, null, null, outFwriter, outFwriterReply);
+				cnt = daumFinan.getDaumFinan("", 0, null, null, outFwriter, outFwriterReply, fileName);
 			break;
 
 			default:
@@ -474,8 +472,8 @@ public class getwww {
 	  // whitespace 처리 
 	  Pattern wspace = Pattern.compile("\\s\\s+");  
 	  mat = wspace.matcher(str); 
-	  str = mat.replaceAll(""); 	          
-	  
+	  str = mat.replaceAll("");
+
 	  } catch (Exception e)
 	  { 
 		  //e.printStackTrace();
@@ -530,6 +528,7 @@ public class getwww {
 		tmpStr = tmpStr.replace("\\^", "");
 		tmpStr = tmpStr.replace("\\", "");
 		tmpStr = tmpStr.replace("\"", "");
+		tmpStr = tmpStr.replace(",", "");
 		return tmpStr;
 	}
 		
